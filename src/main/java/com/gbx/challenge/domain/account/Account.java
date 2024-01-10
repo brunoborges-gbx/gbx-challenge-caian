@@ -24,4 +24,12 @@ public class Account {
         this.account_number = requestAccount.account_number();
         this.balance = requestAccount.balance();
     }
+
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
+    }
 }

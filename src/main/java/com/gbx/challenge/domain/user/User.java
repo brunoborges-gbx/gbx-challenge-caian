@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 @Table(name="users")
 @Entity(name="users")
@@ -25,4 +26,5 @@ public class User {
         this.cpf = requestUser.cpf();
         this.date_of_birth = requestUser.date_of_birth();
     }
+
 }
