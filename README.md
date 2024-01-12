@@ -3,10 +3,10 @@
 ## Descrição
 Este projeto é uma REST API desenvolvida em Java com o framework Spring Boot. Ele utiliza Flyway para migrações de banco de dados, e PostgreSQL como banco de dados. O projeto gerencia informações sobre usuários, contas e transferências.
 
-
 ## Configuração
 1. Clone o repositório:
 git clone https://github.com/CaianMarcinkowski/gbx-challenge
+2. Configure o arquivo "src/main/resources/application.properties" com as informações de seu banco de dados
 
 # Endpoints
 * Liste usuários: GET /user
@@ -38,6 +38,35 @@ Obs.: owner é uma foreign key de usuário, referenciada na tabela users, este v
     "value": 100
     }
 Obs.:Os valores de destiny e origin são foreign key referenciados da tabela account (id), para mais detalhes, consultar o arquivo "src/main/resources/db/migration/V1__create-tables.sql"
+
+## Banco de dados
+
+* Estrutura do banco de dados
+    ```
+    CREATE TABLE users (
+    id TEXT PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    cpf VARCHAR(14) UNIQUE NOT NULL,
+    date_of_birth DATE NOT NULL
+    );
+
+    CREATE TABLE accounts (
+    id TEXT PRIMARY KEY NOT NULL,
+    owner TEXT NOT NULL,
+    account_number INT UNIQUE NOT NULL,
+    balance DOUBLE PRECISION NOT NULL,
+    FOREIGN KEY (owner) REFERENCES users(id)
+    );
+
+    CREATE TABLE transactions (
+    id TEXT PRIMARY KEY NOT NULL,
+    origin TEXT NOT NULL,
+    destiny TEXT NOT NULL,
+    value DOUBLE PRECISION NOT NULL,
+    date DATE NOT NULL,
+    FOREIGN KEY (origin) REFERENCES accounts(id),
+    FOREIGN KEY (destiny) REFERENCES accounts(id)
+    );
 
 ## Tecnologias Utilizadas
 * Java 21
