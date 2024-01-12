@@ -1,11 +1,11 @@
 package com.gbx.challenge.domain.account;
 
+import com.gbx.challenge.OperationType;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.boot.autoconfigure.web.WebProperties;
 
-@Table(name = "account")
-@Entity(name = "account")
+@Table(name = "accounts")
+@Entity(name = "accounts")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -25,11 +25,28 @@ public class Account {
         this.balance = requestAccount.balance();
     }
 
-    public Double getBalance() {
-        return balance;
+    public void updateBalance(Double value, OperationType operationType) {
+        switch (operationType) {
+            case DEBIT:
+                debit(value);
+                break;
+            case CREDIT:
+                credit(value);
+                break;
+            default:
+                throw new IllegalArgumentException("Tipo de operação não suportado: " + operationType);
+        }
     }
 
-    public void setBalance(Double balance) {
-        this.balance = balance;
+    private void debit(Double value) {
+        if (value > balance) {
+            throw new IllegalArgumentException("Saldo insuficiente para débito.");
+        }
+        balance -= value;
     }
+
+    private void credit(Double value) {
+        balance += value;
+    }
+
 }

@@ -16,14 +16,12 @@ public class AccountController {
 
     @GetMapping
     public ResponseEntity getAllAccount(){
-        var allAccounts = repository.findAll();
-        return ResponseEntity.ok(allAccounts);
+        return ResponseEntity.ok(repository.findAll());
     }
 
     @PostMapping
     public ResponseEntity addAccount(@RequestBody @Valid RequestAccount data){
-        Account newAccount = new Account(data);
-        repository.save(newAccount);
+        repository.save(new Account(data));
         return ResponseEntity.ok().build();
     }
 }

@@ -21,18 +21,14 @@ public class Transaction {
     private Date date;
 
     public Transaction(RequestTransaction requestTransaction){
-        this.origin = requestTransaction.origin();
-        this.destiny = requestTransaction.destiny();
-        this.value = requestTransaction.value();
+        this.origin = requestTransaction.getOrigin();
+        this.destiny = requestTransaction.getDestiny();
+        this.value = requestTransaction.getValue();
         this.date = currentDate();
     }
 
     private Date currentDate(){
-        Date date = new Date(System.currentTimeMillis());
-        return date;
+        return new Date(System.currentTimeMillis());
     }
 
-    public Double getValue() {
-        return value;
-    }
 }

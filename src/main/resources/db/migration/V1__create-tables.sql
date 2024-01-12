@@ -5,7 +5,7 @@ CREATE TABLE users (
     date_of_birth DATE NOT NULL
 );
 
-CREATE TABLE account (
+CREATE TABLE accounts (
     id TEXT PRIMARY KEY NOT NULL,
     owner TEXT NOT NULL,
     account_number INT UNIQUE NOT NULL,
@@ -19,6 +19,6 @@ CREATE TABLE transactions (
     destiny TEXT NOT NULL,
     value DOUBLE PRECISION NOT NULL,
     date DATE NOT NULL,
-    FOREIGN KEY (origin) REFERENCES account(id),
-    FOREIGN KEY (destiny) REFERENCES account(id)
+    FOREIGN KEY (origin) REFERENCES accounts(id),
+    FOREIGN KEY (destiny) REFERENCES accounts(id)
 );

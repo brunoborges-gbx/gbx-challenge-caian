@@ -15,14 +15,12 @@ public class UserController {
     private UserRepository repository;
     @GetMapping
     public ResponseEntity getAllUsers(){
-        var allUsers = repository.findAll();
-        return ResponseEntity.ok(allUsers);
+        return ResponseEntity.ok(repository.findAll());
     }
 
     @PostMapping
     public ResponseEntity addUser(@RequestBody @Valid RequestUser data){
-        User newUser = new User(data);
-        repository.save(newUser);
+        repository.save(new User(data));
         return ResponseEntity.ok().build();
     }
 }
