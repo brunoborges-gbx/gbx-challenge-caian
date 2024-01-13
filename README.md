@@ -11,7 +11,7 @@ git clone https://github.com/CaianMarcinkowski/gbx-challenge
 # Endpoints
 * Liste usuários: GET /user
 * Crie um novo usuário: POST /user
-  * Exemplo Json:     
+  * Exemplo de Json para o POST:     
    ```
     {
     "name": "Alcemar da Silva Silva",
@@ -20,7 +20,7 @@ git clone https://github.com/CaianMarcinkowski/gbx-challenge
     }
 * Liste contas: GET /account
 * Crie uma nova conta: POST /account
-  * Exemplo Json:
+  * Exemplo de Json para o POST:
   ```
     {
     "owner": "43459dae-35e0-4de9-be51-dcb6dac20070",
@@ -30,7 +30,7 @@ git clone https://github.com/CaianMarcinkowski/gbx-challenge
 Obs.: owner é uma foreign key de usuário, referenciada na tabela users, este valor deve ser o mesmo de uma chave primária da coluna id da tabela users, para mais detalhes consultar o arquivo "src/main/resources/db/migration/V1__create-tables.sql"
 * Liste transferências: GET /transaction
 * Crie uma nova transferência: POST /transaction
-  * Exemplo Json:
+  * Exemplo de Json para o POST:
   ```
     {
     "origin": "da57bf34-c898-48c8-b3c4-2db0a775a1f0",
@@ -40,6 +40,8 @@ Obs.: owner é uma foreign key de usuário, referenciada na tabela users, este v
 Obs.:Os valores de destiny e origin são foreign key referenciados da tabela account (id), para mais detalhes, consultar o arquivo "src/main/resources/db/migration/V1__create-tables.sql"
 
 ## Banco de dados
+
+* Caso queira usar, eu exportei as tabelas do banco de dados, esta em "tables_db"
 
 * Estrutura do banco de dados
     ```
@@ -57,7 +59,7 @@ Obs.:Os valores de destiny e origin são foreign key referenciados da tabela acc
     balance DOUBLE PRECISION NOT NULL,
     FOREIGN KEY (owner) REFERENCES users(id)
     );
-
+    
     CREATE TABLE transactions (
     id TEXT PRIMARY KEY NOT NULL,
     origin TEXT NOT NULL,
