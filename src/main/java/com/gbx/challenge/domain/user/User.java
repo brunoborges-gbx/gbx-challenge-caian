@@ -8,23 +8,16 @@ import java.text.SimpleDateFormat;
 
 @Table(name="users")
 @Entity(name="users")
-@Getter
-@Setter
+@Data // A annotation Data do lombok substitui o Constructor, Getters, Setters, Equals e Hashcode
 @AllArgsConstructor
+@Builder
 @NoArgsConstructor
-@EqualsAndHashCode(of = "id")
 public class User {
+
     @Id @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
-
     private String name;
     private String cpf;
     private Date date_of_birth;
-
-    public User(RequestUser requestUser){
-        this.name = requestUser.name();
-        this.cpf = requestUser.cpf();
-        this.date_of_birth = requestUser.date_of_birth();
-    }
 
 }

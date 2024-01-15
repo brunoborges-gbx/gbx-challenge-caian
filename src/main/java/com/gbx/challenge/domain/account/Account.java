@@ -6,25 +6,21 @@ import lombok.*;
 
 @Table(name = "accounts")
 @Entity(name = "accounts")
-@Getter
-@Setter
+@Data
+@Builder // O Builder do Lombok é muito útil para instanciar classes
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(of = "id")
 public class Account {
+
     @Id @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
-
     private String owner;
     private Integer account_number;
     private Double balance;
 
-    public Account(RequestAccount requestAccount){
-        this.owner = requestAccount.owner();
-        this.account_number = requestAccount.account_number();
-        this.balance = requestAccount.balance();
-    }
 
+    // Esta é considerada uma regra de negócio, com sua lógica própria. Deve ser implementada na camada de service,
+    // não na própria classe da entidade
     public void updateBalance(Double value, OperationType operationType) {
         switch (operationType) {
             case DEBIT:
